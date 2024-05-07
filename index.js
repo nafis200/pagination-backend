@@ -36,6 +36,11 @@ async function run() {
        const result = await cursor.toArray()
        res.send(result)
     })
+
+    app.get('/productsCount',async(req,res)=>{
+         const count = await coffeeCollection.estimatedDocumentCount();
+         res.send({count});
+    })
    
 
     
