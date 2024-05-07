@@ -32,12 +32,33 @@ async function run() {
     // Send a ping to confirm a successful connection
     const coffeeCollection = client.db('emaJohnDB').collection('products')
     app.get('/products',async(req,res)=>{
+      
+      const page = parseInt(req.query.page)
+      const size = parseInt(req.query.size)
+
+
        const cursor = coffeeCollection.find()
-       const result = await cursor.toArray()
+       const result = await cursor.skip(page * size).limit(size).toArray()
        res.send(result)
     })
 
+    app.post('/productByIds',async(req,res)=>{
+         const ids = req.body;
+         console.log(ids);
+         console.log(ids);
+         const idswithObjectId = ids.map(id => new ObjectId(id))
+         const query = {
+           _id: {
+              $in : idswithObjectId
+           }
+         }
+         const result = await coffeeCollection.find(query).toArray()
+
+         res.send(result)
+    })
+
     app.get('/productsCount',async(req,res)=>{
+        
          const count = await coffeeCollection.estimatedDocumentCount();
          res.send({count});
     })

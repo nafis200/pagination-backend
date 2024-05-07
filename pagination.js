@@ -7,6 +7,12 @@
 
 //   const pages = [...Array(numberOfPages).keys()]
 
+// useEffect(() => {
+//     fetch(`http://localhost:5000/products?page=${currentPage}&size=${itemsPerPages}`)
+//         .then(res => res.json())
+//         .then(data => setProducts(data))
+// }, [currentPage,itemsPerPages]);
+
 
 // const handleItemsperpage = e =>{
        
@@ -48,3 +54,13 @@
 //    <option value="50">50</option>
 // </select>
 // </div>
+
+
+
+
+// it dosent gives any error
+
+// {
+                
+//     pages.map(page => <button onClick={()=>setCurrentPage(page)}  className={currentPage === page ? 'selected' : undefined }>{page}</button> )
+//  }
